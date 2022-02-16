@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const routes = require("./src/routes");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -11,14 +12,8 @@ app.use("/", (request, response) => {
   response.send("Aqui vai a Home Page da Aplicação");
 });
 
-app.use("/user", (request, response) => {
-  response.send("Aqui vai a rota para User");
-});
-app.use("/login", (request, response) => {
-  response.send("Aqui vai a rota para Login");
-});
-app.use("/post", (request, response) => {
-  response.send("Aqui vai a rota para Post");
-});
+app.use("/user", routes.UserRoutes);
+app.use("/login", routes.LoginRoutes);
+app.use("/post", routes.PostRoutes);
 
 app.listen(PORT, () => console.log(`Aplicação rodando na porta ${PORT}`));
