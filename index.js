@@ -7,4 +7,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use("/", (request, response) => {
+  response.send("Aqui vai a Home Page da Aplicação");
+});
+
 app.listen(PORT, () => console.log(`Aplicação rodando na porta ${PORT}`));
