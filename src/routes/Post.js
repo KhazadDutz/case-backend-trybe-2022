@@ -2,26 +2,26 @@ const router = require("express").Router();
 const postControllers = require("../controllers/Post");
 const validations = require("../middlewares");
 
-// implementar a validação de JSONWebToken(Middleware)
-router.post("/", validations.createPostValidations, postControllers.createPost);
+router.post(
+  "/",
+  validations.validateJWT,
+  validations.createPostValidations,
+  postControllers.createPost
+);
 
-// implementar a validação de JSONWebToken(Middleware)
-router.get("/:id", postControllers.createPost);
+router.get("/:id", validations.validateJWT, postControllers.createPost);
 
 // será implementado à lógica junto da getAllPosts, porém mais a frente
 router.get("/search?q=:searchTerm", (req, res) => {
   res.send("Aqui vai o controller de Post através do searchTerm, para o GET");
 });
 
-//implementar a validação de JSONWebToken(Middleware)
-router.get("/", postControllers.getAllPosts);
+router.get("/", validations.validateJWT, postControllers.getAllPosts);
 
-// implementar a validação de JSONWebToken(Middleware)
 // implementar a validação de usuário(Middleware)
-router.put("/:id", postControllers.updatePostById);
+router.put("/:id", validations.validateJWT, postControllers.updatePostById);
 
-// implementar a validação de JSONWebToken(Middleware)
 // implementar a validação de usuário(Middleware)
-router.delete("/:id", postControllers.deletePostById);
+router.delete("/:id", validations.validateJWT, postControllers.deletePostById);
 
 module.exports = router;
