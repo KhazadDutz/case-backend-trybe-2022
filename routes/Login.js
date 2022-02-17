@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const loginControllers = require("../controllers/Login");
+const validations = require("../middlewares");
 
-// implementar a validação de email e password(Helpers)
-router.post("/", loginControllers.signIn);
+router.post("/", validations.loginValidations, loginControllers.login);
 
 module.exports = router;
