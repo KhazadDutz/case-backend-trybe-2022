@@ -1,19 +1,16 @@
 const router = require("express").Router();
+const userControllers = require("../controllers/User");
 
-router.post("/", (req, res) => {
-  res.send("Aqui vai o controller de Users, para o POST");
-});
+// implementar a validaçao de displayName, email, password e image(Helpers)
+router.post("/", userControllers.createUser);
 
-router.get("/:id", (req, res) => {
-  res.send("Aqui vai o controller de Users atraves do :id, para o GET");
-});
+// implementar a validação de JSONWebToken(Middleware)
+router.get("/:id", userControllers.getUserById);
 
-router.get("/", (req, res) => {
-  res.send("Aqui vai o controller de Users, para o GET");
-});
+// implementar a validação de JSONWebToken(Middleware)
+router.get("/", userControllers.getAllUsers);
 
-router.delete("/me", (req, res) => {
-  res.send("Aqui vai o controller de Users, para o DELETE");
-});
+// implementar a validação de JSONWebToken(Middleware)
+router.delete("/me", userControllers.deleteOwnUser);
 
 module.exports = router;
