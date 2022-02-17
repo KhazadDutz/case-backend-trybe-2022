@@ -2,11 +2,13 @@
 
 const createUser = async (req, res) => {
   try {
-    const token = await userServices.createUser(req.body);
-    return res.status(201).json({ message: e.message });
+    const { displayName, email, password, image } = req.body;
+    const userData = { displayName, email, password, image };
+    const token = await userServices.createUser(userData);
+    return res.status(201).json(token);
   } catch (e) {
     console.log(e);
-    return res.status(409).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 
