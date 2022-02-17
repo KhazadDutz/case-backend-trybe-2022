@@ -1,16 +1,16 @@
 const router = require("express").Router();
-const userController = require("../controllers/User");
+const userControllers = require("../controllers/User");
 
 // implementar a validaçao de displayName, email, password e image(Helpers)
-router.post("/", userController.createUser);
+router.post("/", userControllers.createUser);
 
 // implementar a validação de JSONWebToken(Middleware)
-router.get("/:id", userController.getUserById);
+router.get("/:id", userControllers.getUserById);
 
 // implementar a validação de JSONWebToken(Middleware)
-router.get("/", userController.getAllUsers);
+router.get("/", userControllers.getAllUsers);
 
 // implementar a validação de JSONWebToken(Middleware)
-router.delete("/me", userController.deleteOwnUser);
+router.delete("/me", userControllers.deleteOwnUser);
 
 module.exports = router;
