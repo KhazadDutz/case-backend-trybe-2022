@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const userControllers = require("../controllers/User");
+const validations = require("../middlewares");
 
-// implementar a validaçao de displayName, email, password e image(Helpers)
-router.post("/", userControllers.createUser);
+// implementar a verificação se o usuario existe no services
+router.post("/", validations.createUserValidations, userControllers.createUser);
 
 // implementar a validação de JSONWebToken(Middleware)
 router.get("/:id", userControllers.getUserById);

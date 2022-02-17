@@ -1,3 +1,5 @@
+// código encontrado nesse site:
+// https://rollbar.com/guides/javascript/how-to-throw-exceptions-in-javascript/#
 function customException(code, message) {
   const error = new Error(message);
   error.code = code;
