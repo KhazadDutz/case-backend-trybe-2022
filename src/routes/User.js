@@ -10,8 +10,7 @@ router.get("/:id", userController.getUserById);
 // implementar a validação de JSONWebToken(Middleware)
 router.get("/", userController.getAllUsers);
 
-router.delete("/me", (req, res) => {
-  res.send("Aqui vai o controller de Users, para o DELETE");
-});
+// implementar a validação de JSONWebToken(Middleware)
+router.delete("/me", userController.deleteOwnUser);
 
 module.exports = router;

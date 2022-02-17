@@ -31,8 +31,23 @@ const getUserById = async (req, res) => {
   }
 };
 
+const deleteOwnUser = async (req, res) => {
+  try {
+    // data -> userInfo vem do JSONWebToken
+    const {
+      data: { id },
+    } = req.userInfo;
+    await userServices.deleteOwnUser(id);
+    return res.status(204).json();
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ message: e.message });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
   getUserById,
+  deleteOwnUser,
 };
