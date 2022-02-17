@@ -3,7 +3,7 @@
 const createPost = async (req, res) => {
   try {
     const { title, content } = req.body;
-    const posted = await createPost(title, content);
+    const posted = await postServices.createPost(title, content);
     // posted = {
     //   "title": 'title',
     //   "content": 'text',
@@ -18,7 +18,7 @@ const createPost = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
   try {
-    const allPosts = await getAllPosts();
+    const allPosts = await postServices.getAllPosts();
     return res.status(200).json(allPosts);
   } catch (e) {
     console.log(e);
@@ -29,7 +29,7 @@ const getAllPosts = async (req, res) => {
 const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await getPostById(id);
+    const post = await postServices.getPostById(id);
     return res.status(200).json(post);
   } catch (e) {
     console.log(e);
@@ -39,9 +39,12 @@ const getPostById = async (req, res) => {
 
 const updatePostById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id: postId } = req.params;
     const { title, content } = req.body;
-    const updatedPost = await updatePostById(id, title, content);
+    const {
+      data: { id: userId },
+    } = req.userInfo;
+    const updatedPost = await postServices.updatePostById(postId, userId, title, content);
     return res.status(200).json(updatedPost);
   } catch (e) {
     console.log(e);
@@ -51,8 +54,11 @@ const updatePostById = async (req, res) => {
 
 const deletePostById = async (req, res) => {
   try {
-    const { id } = req.params;
-    await deletePostById(id);
+    const { id: postId } = req.params;
+    const {
+      data: { id: userId },
+    } = req.userInfo;
+    await postServices.deletePostById(postId, userId);
     return res.status(204).json();
   } catch (e) {
     console.log(e);

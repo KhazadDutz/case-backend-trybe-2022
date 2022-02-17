@@ -9,7 +9,7 @@ router.post(
   postControllers.createPost
 );
 
-router.get("/:id", validations.validateJWT, postControllers.createPost);
+router.get("/:id", validations.validateJWT, postControllers.getPostById);
 
 // será implementado à lógica junto da getAllPosts, porém mais a frente
 router.get("/search?q=:searchTerm", (req, res) => {
