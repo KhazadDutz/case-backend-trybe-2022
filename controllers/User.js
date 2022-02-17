@@ -1,11 +1,11 @@
-// const userServices = require('../services/userServices');
+const userServices = require("../services");
 
 const createUser = async (req, res) => {
   try {
     const { displayName, email, password, image } = req.body;
     const userData = { displayName, email, password, image };
     const token = await userServices.createUser(userData);
-    return res.status(201).json(token);
+    return res.status(201).json({ token });
   } catch (e) {
     console.log(e);
     return res.status(e.code).json({ message: e.message });
