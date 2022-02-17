@@ -1,7 +1,13 @@
+const { customException } = require("./customException");
+
 const validatePwd = (pwd) => {
-  if (!pwd) return { code: 400, message: '"password" is required' };
+  if (pwd === undefined) throw customException(400, '"password" is required');
   if (pwd === "")
-    return { code: 400, message: '"password" is not allowed to be empty' };
+    throw customException(400, '"password" is not allowed to be empty');
 
   return null;
+};
+
+module.exports = {
+  validatePwd,
 };
