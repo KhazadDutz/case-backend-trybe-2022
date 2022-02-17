@@ -1,8 +1,7 @@
 const router = require("express").Router();
-
-router.post("/", (req, res) => {
-  res.send("Aqui vai o controller de Users, para o POST");
-});
+const userController = require("../controllers/User");
+// implementar a validaçao de displayName, email, password e image
+router.post("/", userController.createUser);
 
 router.get("/:id", (req, res) => {
   res.send("Aqui vai o controller de Users atraves do :id, para o GET");
