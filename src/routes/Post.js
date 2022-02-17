@@ -5,9 +5,8 @@ const postController = require("../controllers/Post");
 // implementar a validacao de title e content(Helpers)
 router.post("/", postController.createPost);
 
-router.get("/:id", (req, res) => {
-  res.send("Aqui vai o controller de Post através do :id, para o GET");
-});
+// implementar a validação de JSONWebToken(Middleware)
+router.get("/:id", postController.createPost);
 
 router.get("/search?q=:searchTerm", (req, res) => {
   res.send("Aqui vai o controller de Post através do searchTerm, para o GET");
