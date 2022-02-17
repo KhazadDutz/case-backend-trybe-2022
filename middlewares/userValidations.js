@@ -1,9 +1,4 @@
-const {
-  validateEmail,
-  validatePwd,
-  validateDisplayName,
-  validateImage,
-} = require("../helpers");
+const { validateEmail, validatePwd, validateDisplayName, validateImage } = require("../helpers");
 
 const createUserValidations = async (req, res, next) => {
   try {
