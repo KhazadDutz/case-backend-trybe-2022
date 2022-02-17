@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const postControllers = require("../controllers/Post");
+const validations = require("../middlewares");
 
 // implementar a validação de JSONWebToken(Middleware)
-// implementar a validacao de title e content(Helpers)
-router.post("/", postControllers.createPost);
+router.post("/", validations.createPostValidations, postControllers.createPost);
 
 // implementar a validação de JSONWebToken(Middleware)
 router.get("/:id", postControllers.createPost);
