@@ -1,8 +1,9 @@
 const router = require("express").Router();
+const postController = require("../controllers/Post");
 
-router.post("/", (req, res) => {
-  res.send("Aqui vai o controller de Post, para o POST");
-});
+// implementar a validação de JSONWebToken(Middleware)
+// implementar a validacao de title e content(Helpers)
+router.post("/", postController.createPost);
 
 router.get("/:id", (req, res) => {
   res.send("Aqui vai o controller de Post através do :id, para o GET");
