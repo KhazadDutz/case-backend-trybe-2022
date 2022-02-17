@@ -13,9 +13,8 @@ router.get("/search?q=:searchTerm", (req, res) => {
   res.send("Aqui vai o controller de Post através do searchTerm, para o GET");
 });
 
-router.get("/", (req, res) => {
-  res.send("Aqui vai o controller de Post, para o GET");
-});
+//implementar a validação de JSONWebToken(Middleware)
+router.get("/", postController.getAllPosts);
 
 router.put("/:id", (req, res) => {
   res.send("Aqui vai o controller de Post através do :id, para o PUT");
