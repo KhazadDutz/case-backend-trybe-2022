@@ -18,7 +18,7 @@ const getAllUsers = async (req, res) => {
     return res.status(200).json(users);
   } catch (e) {
     console.log(e);
-    return res.status(404).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 
@@ -29,13 +29,12 @@ const getUserById = async (req, res) => {
     return res.status(200).json(user);
   } catch (e) {
     console.log(e);
-    return res.status(404).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 
 const deleteOwnUser = async (req, res) => {
   try {
-    // data -> userInfo vem do JSONWebToken
     const {
       data: { id },
     } = req.userInfo;
@@ -43,7 +42,7 @@ const deleteOwnUser = async (req, res) => {
     return res.status(204).json();
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 
