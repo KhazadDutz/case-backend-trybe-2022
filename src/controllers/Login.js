@@ -10,3 +10,7 @@ const signIn = async (req, res) => {
     return res.status(400).json({ message: e.message });
   }
 };
+
+module.exports = {
+  signIn,
+};
