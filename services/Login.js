@@ -1,5 +1,6 @@
 const { Users } = require("../models");
 const { generateJWT } = require("../helpers");
+const { customException } = require("../helpers");
 
 const login = async (userData) => {
   const { email, password } = userData;

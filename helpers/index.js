@@ -6,7 +6,8 @@ const { validateImage } = require("./imageValidation");
 const { validateTitle } = require("./titleValidation");
 const { validateContent } = require("./contentValidation");
 const { generateJWT } = require("./generateJWT");
-const { checkUserAuthPostExists } = require("./checkUserAuth");
+const { checkUserAuthorization } = require("./checkUserAuth");
+const { checkPostExists } = require("./checkPostExists");
 
 module.exports = {
   validateEmail,
@@ -17,5 +18,6 @@ module.exports = {
   validateTitle,
   validateContent,
   generateJWT,
-  checkUserAuthPostExists,
+  checkUserAuthorization,
+  checkPostExists,
 };

@@ -1,18 +1,23 @@
 const { Posts } = require("../models");
-const { customException, checkUserAuthPostExists } = require("../helpers");
+const { customException, checkUserAuthorization, checkPostExists } = require("../helpers");
 
 const createPost = async () => {};
 
 const getAllPosts = async () => {};
 
-const getPostById = async () => {};
+const getPostById = async (postId) => {
+  const foundPost = await checkPostExists(postId);
+  return foundPost;
+};
 
 const updatePostById = async (postId, userId, title, content) => {
-  await checkUserAuthPostExists(postId, userId);
+  const foundPost = await checkPostExists(postId);
+  await checkUserAuthorization(foundPost.userId, userId);
 };
 
 const deletePostById = async (postId, userId) => {
-  await checkUserAuthPostExists(postId, userId);
+  const foundPost = await checkPostExists(postId);
+  await checkUserAuthorization(foundPost.userId, userId);
 };
 
 module.exports = {
