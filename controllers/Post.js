@@ -11,13 +11,13 @@ const createPost = async (req, res) => {
   }
 };
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = async (_req, res) => {
   try {
     const allPosts = await postServices.getAllPosts();
     return res.status(200).json(allPosts);
   } catch (e) {
     console.log(e);
-    return res.status(404).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 

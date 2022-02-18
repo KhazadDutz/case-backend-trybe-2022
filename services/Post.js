@@ -11,7 +11,11 @@ const createPost = async (title, content) => {
   return posted;
 };
 
-const getAllPosts = async () => {};
+const getAllPosts = async () => {
+  const allPosts = await Posts.findAll();
+  if (allPosts.length === 0) throw customException(404, "Post não encontrado");
+  return allPosts;
+};
 
 const getPostById = async (postId) => {
   const foundPost = await checkPostExists(postId);
