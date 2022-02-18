@@ -2,8 +2,11 @@ const postServices = require("../services");
 
 const createPost = async (req, res) => {
   try {
+    const {
+      data: { id: userId },
+    } = req.userInfo;
     const { title, content } = req.body;
-    const posted = await postServices.createPost(title, content);
+    const posted = await postServices.createPost(title, content, userId);
     return res.status(201).json(posted);
   } catch (e) {
     console.log(e);
