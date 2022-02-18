@@ -1,5 +1,5 @@
 const { Posts } = require("../models");
-const { customException } = require("../helpers");
+const { customException } = require("./customException");
 
 const checkPostExists = async (paramsId) => {
   const foundPost = Posts.findByPk(paramsId);
