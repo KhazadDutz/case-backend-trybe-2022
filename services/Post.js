@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Posts, Users } = require("../models");
 const { customException, checkUserAuthorization, checkPostExists } = require("../helpers");
 
@@ -11,12 +12,21 @@ const createPost = async (title, content, userId) => {
   return posted;
 };
 
-const getAllPosts = async () => {
+const getAllPosts = async (searchParam) => {
   const allPosts = await Posts.findAll({
+    where:
+      searchParam && searchParam !== ""
+        ? {
+            [Op.or]: [
+              { title: { [Op.like]: `%${searchParam}%` } },
+              { content: { [Op.like]: `%${searchParam}%` } },
+            ],
+          }
+        : null,
     attributes: { exclude: ["UserId", "userId"] },
     include: [{ model: Users, as: "user", attributes: { exclude: ["password"] } }],
   });
-  if (allPosts.length === 0) throw customException(404, "Post não encontrado");
+  if (!searchParam && allPosts.length === 0) throw customException(404, "Post não encontrado");
   return allPosts;
 };
 
