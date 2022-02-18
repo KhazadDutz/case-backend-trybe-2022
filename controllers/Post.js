@@ -1,14 +1,9 @@
-// const postServices = require("../services/postServices");
+const postServices = require("../services");
 
 const createPost = async (req, res) => {
   try {
     const { title, content } = req.body;
     const posted = await postServices.createPost(title, content);
-    // posted = {
-    //   "title": 'title',
-    //   "content": 'text',
-    //   "userId": 1
-    // }
     return res.status(201).json(posted);
   } catch (e) {
     console.log(e);

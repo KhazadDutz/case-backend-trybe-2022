@@ -1,7 +1,15 @@
 const { Posts } = require("../models");
 const { customException, checkUserAuthorization, checkPostExists } = require("../helpers");
 
-const createPost = async () => {};
+const createPost = async (title, content) => {
+  const createdPost = await Posts.create({ title, content });
+  const posted = {
+    title,
+    content,
+    userId: createdPost.id,
+  };
+  return posted;
+};
 
 const getAllPosts = async () => {};
 
