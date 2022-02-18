@@ -1,14 +1,12 @@
-// const postServices = require("../services/postServices");
+const postServices = require("../services");
 
 const createPost = async (req, res) => {
   try {
+    const {
+      data: { id: userId },
+    } = req.userInfo;
     const { title, content } = req.body;
-    const posted = await postServices.createPost(title, content);
-    // posted = {
-    //   "title": 'title',
-    //   "content": 'text',
-    //   "userId": 1
-    // }
+    const posted = await postServices.createPost(title, content, userId);
     return res.status(201).json(posted);
   } catch (e) {
     console.log(e);
@@ -18,11 +16,12 @@ const createPost = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
   try {
-    const allPosts = await postServices.getAllPosts();
+    const { q } = req.query;
+    const allPosts = await postServices.getAllPosts(q);
     return res.status(200).json(allPosts);
   } catch (e) {
     console.log(e);
-    return res.status(404).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 
@@ -33,7 +32,7 @@ const getPostById = async (req, res) => {
     return res.status(200).json(post);
   } catch (e) {
     console.log(e);
-    return res.status(404).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 
@@ -48,7 +47,7 @@ const updatePostById = async (req, res) => {
     return res.status(200).json(updatedPost);
   } catch (e) {
     console.log(e);
-    return res.status(401).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 
@@ -62,7 +61,7 @@ const deletePostById = async (req, res) => {
     return res.status(204).json();
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 

@@ -9,19 +9,19 @@ router.post(
   postControllers.createPost
 );
 
-router.get("/:id", validations.validateJWT, postControllers.getPostById);
+router.get("/search", validations.validateJWT, postControllers.getAllPosts);
 
-// será implementado à lógica junto da getAllPosts, porém mais a frente
-router.get("/search?q=:searchTerm", (req, res) => {
-  res.send("Aqui vai o controller de Post através do searchTerm, para o GET");
-});
+router.get("/:id", validations.validateJWT, postControllers.getPostById);
 
 router.get("/", validations.validateJWT, postControllers.getAllPosts);
 
-// implementar a validação de usuário(Middleware)
-router.put("/:id", validations.validateJWT, postControllers.updatePostById);
+router.put(
+  "/:id",
+  validations.validateJWT,
+  validations.createPostValidations,
+  postControllers.updatePostById
+);
 
-// implementar a validação de usuário(Middleware)
 router.delete("/:id", validations.validateJWT, postControllers.deletePostById);
 
 module.exports = router;
