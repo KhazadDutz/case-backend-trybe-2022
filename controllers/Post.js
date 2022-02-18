@@ -60,7 +60,7 @@ const deletePostById = async (req, res) => {
     return res.status(204).json();
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 

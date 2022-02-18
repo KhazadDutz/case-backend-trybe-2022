@@ -42,6 +42,8 @@ const updatePostById = async (postId, userId, title, content) => {
 const deletePostById = async (postId, userId) => {
   const foundPost = await checkPostExists(postId);
   await checkUserAuthorization(foundPost.userId, userId);
+  await Posts.destroy({ where: { id: postId } });
+  return null;
 };
 
 module.exports = {
