@@ -46,7 +46,7 @@ const updatePostById = async (req, res) => {
     return res.status(200).json(updatedPost);
   } catch (e) {
     console.log(e);
-    return res.status(401).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 

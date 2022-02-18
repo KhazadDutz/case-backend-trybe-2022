@@ -32,6 +32,11 @@ const getPostById = async (postId) => {
 const updatePostById = async (postId, userId, title, content) => {
   const foundPost = await checkPostExists(postId);
   await checkUserAuthorization(foundPost.userId, userId);
+  await Posts.update({ title, content }, { where: { id: postId } });
+  const updatedPost = await Posts.findByPk(postId, {
+    attributes: { exclude: ["UserId", "published", "updated", "id"] },
+  });
+  return updatedPost;
 };
 
 const deletePostById = async (postId, userId) => {

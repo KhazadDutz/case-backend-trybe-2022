@@ -19,7 +19,12 @@ router.get("/search?q=:searchTerm", (req, res) => {
 router.get("/", validations.validateJWT, postControllers.getAllPosts);
 
 // implementar a validação de usuário(Middleware)
-router.put("/:id", validations.validateJWT, postControllers.updatePostById);
+router.put(
+  "/:id",
+  validations.validateJWT,
+  validations.createPostValidations,
+  postControllers.updatePostById
+);
 
 // implementar a validação de usuário(Middleware)
 router.delete("/:id", validations.validateJWT, postControllers.deletePostById);
