@@ -31,7 +31,7 @@ const getPostById = async (req, res) => {
     return res.status(200).json(post);
   } catch (e) {
     console.log(e);
-    return res.status(404).json({ message: e.message });
+    return res.status(e.code).json({ message: e.message });
   }
 };
 

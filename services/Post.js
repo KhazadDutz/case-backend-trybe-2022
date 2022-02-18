@@ -21,7 +21,11 @@ const getAllPosts = async () => {
 };
 
 const getPostById = async (postId) => {
-  const foundPost = await checkPostExists(postId);
+  const foundPost = await Posts.findByPk(postId, {
+    attributes: { exclude: ["UserId", "userId"] },
+    include: [{ model: Users, as: "user", attributes: { exclude: ["password"] } }],
+  });
+  if (!foundPost) throw customException(404, "Post não existe");
   return foundPost;
 };
 
