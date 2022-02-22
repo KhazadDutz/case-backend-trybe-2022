@@ -17,3 +17,5 @@ app.use("/", (request, response) => {
 });
 
 app.listen(PORT, () => console.log(`Aplicação rodando na porta ${PORT}`));
+
+module.exports = app;
